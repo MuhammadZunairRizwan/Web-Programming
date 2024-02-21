@@ -1,0 +1,57 @@
+body {
+    height: 100%;
+    width: 100%;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #222;
+}
+
+.navbar-brand {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 40px;
+    color: #411380 !important;
+}
+
+.navbar {
+    padding: 0.4rem;
+    background-color: #6c757d !important;
+    box-sizing: border-box;
+}
+
+.navbar-nav li {
+    padding-right: 20px;
+}
+
+.nav-link {
+    font-size: 1.1em !important;
+    margin: 15px;
+    color: #411380 !important;
+}
+
+.container {
+    margin-top: 50px;
+}
+
+.login-container {
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+}
+
+.login-container h2 {
+    color: #411380;
+    margin-bottom: 20px;
+}
+
+.login-container .form-group {
+    margin-bottom: 20px;
+}
+
+.login-container .btn {
+    background-color: #411380;
+    color: #fff;
+}
+
+.login-container .btn:hover {
+    background-color: #5c2d91;
+}
