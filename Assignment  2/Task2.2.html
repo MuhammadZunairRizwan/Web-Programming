@@ -119,6 +119,22 @@
             alert('Contact number should not be empty');
             return false;
         }
+        var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(email)) {
+            alert('Please enter a valid email address');
+            return false;
+        }
+        var phoneRegex = /^\d{10}$/;
+        if (!phoneRegex.test(num)) {
+            alert('Please enter a valid phone number');
+            return false;
+        }
+
+        var postalCodeRegex = /^\d{5}$/;
+        if (!postalCodeRegex.test(code)) {
+            alert('Please enter a valid postal code');
+            return false;
+        }
 
 
 
