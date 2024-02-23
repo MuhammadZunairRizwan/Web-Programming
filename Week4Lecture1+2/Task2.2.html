@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Nike.com</title>
+    <script src="https://use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link href="Task2.2.css" rel="stylesheet">
+</head>
+<body>
+
+<nav class="navbar navbar-expand-md navbar-light bg-light sticky-top">
+    <div class="container-fluid">
+        <a href="#" class="navbar-brand ml-3 animated  fadeInUp" style="font-family: fantasy;">Nike.com</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="#"><input type="text" placeholder="Search.."></a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="#">Why Us?</a>
+                </li>
+
+                <li class="nav-item active">
+                    <a class="nav-link">Our Products</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="#">Pricing</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-4">
+            <div class="login-container">
+                <h2 class="text-center">Sign Up Form</h2>
+                <form action="Task2.html" onsubmit="return validateForm()">
+                    <div class="form-group">
+                        <label >First Name:</label>
+                        <input type="text" class="form-control" id="fname" placeholder="First">
+                    </div>
+                    <div class="form-group">
+                        <label >Last Name:</label>
+                        <input type="Text" class="form-control" id="lname" placeholder="Last">
+                    </div>
+                    <div class="form-group">
+                        <label>Contact Number :</label>
+                        <input type="number" class="form-control" id="num" placeholder="+923000000000">
+                    </div>
+                    <div class="form-group">
+                        <label >Email address:</label>
+                        <input type="email" class="form-control" id="email" placeholder="abc@xyz.com">
+                    </div>
+                    <div class="form-group">
+                        <label>Password:</label>
+                        <input type="password" class="form-control" id="pwd" placeholder="Password">
+                    </div>
+                    <div class="form-group">
+                        <label>Birthday:</label>
+                        <input type="date" class="form-control" id="Birthday">
+                    </div>
+                    <div class="form-group">
+                        <label>Gender:</label>
+                        <select class="form-control" id="gender">
+                            <option value="male">Male</option>
+                            <option value="female">Female</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Country</label>
+                        <input type="text" class="form-control" id="country">
+                    </div>
+                    <div class="form-group">
+                        <label>Postal Code</label>
+                        <input type="number" class="form-control" id="code">
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-block">Register</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container-fluid padding">
+    <div class="row welcome text-center">
+        <div class="col-12">
+            <h1 class="display-4">Nike.com</h1>
+            <h3>A Complete Brand.</h3>
+        </div>
+    </div>
+</div>
+
+<script>
+    function validateForm() {
+        var fname = document.getElementById('fname').value;
+        var lname = document.getElementById('lname').value;
+        var num = document.getElementById('num').value;
+        var email = document.getElementById('email').value;
+        var pwd = document.getElementById('pwd').value;
+        var Birthday = document.getElementById('Birthday').value;
+        var gender = document.getElementById('gender').value;
+        var country = document.getElementById('country').value;
+        var code = document.getElementById('code').value;
+
+        if (fname == '' || lname == '' || num == '' || email == '' || pwd == '' || Birthday == '' || gender == '' || country == '' || code == '') {
+            alert('Please fill all the fields');
+            return false;
+        }
+
+        if (pwd.length < 6) {
+            alert('Password should be at least 6 characters long');
+            return false;
+        }
+
+        if (num.length < 1) {
+            alert('Contact number should not be empty');
+            return false;
+        }
+        var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(email)) {
+            alert('Please enter a valid email address');
+            return false;
+        }
+        var phoneRegex = /^\d{10}$/;
+        if (!phoneRegex.test(num)) {
+            alert('Please enter a valid phone number');
+            return false;
+        }
+
+        var postalCodeRegex = /^\d{5}$/;
+        if (!postalCodeRegex.test(code)) {
+            alert('Please enter a valid postal code');
+            return false;
+        }
+
+
+
+        return true;
+    }
+</script>
+
+</body>
+</html>
