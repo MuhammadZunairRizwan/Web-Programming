@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task2</title>
+</head>
+<body style="background-color: antiquewhite;">
+    <div class="container"   style="padding-top: 15%;">
+        <h3>Weather Forecast</h3>
+    </br>
+        <input type="text" id="cityInput" placeholder="Enter city">
+        <button id="searchBtn">Search</button>
+        <div  id="currentConditions"></div>
+        <div  id="forecast"></div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="script.js"></script>
+</body>
+<style>
+.container {
+    max-width: 600px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+input[type="text"] {
+    width: 60%;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+button {
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+#currentConditions, #forecast {
+    margin-top: 20px;
+}
+
+</style>
+<script>
+    $(document).ready(function() {
+        $('#searchBtn').click(function() {
+            var city = $('#cityInput').val();
+            fetchWeatherData(city);
+        });
+    });
+    
+    function fetchWeatherData(city) {
+        var apiKey = 'e3e4b59d083114faa1c175c538cf139e';
+        var apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
+    
+        $.get(apiUrl, function(data) {
+            displayCurrentConditions(data);
+        });
+    
+        apiUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${apiKey}&units=metric`;
+        $.get(apiUrl, function(data) {
+            displayForecast(data);
+        });
+    }
+    
+    function displayCurrentConditions(data) {
+        var city = data.name;
+        var temperature = data.main.temp;
+        var weatherDescription = data.weather[0].description;
+        var html = `
+            <h2>Current Conditions in ${city}</h2>
+            <p>Temperature: ${temperature}°C</p>
+            <p>Weather: ${weatherDescription}</p>
+        `;
+         $('#currentConditions').html(html);
+    }
+    
+    function displayForecast(data) {
+        var forecasts = data.list;
+        var html = '<div class="forecast"><h2>5-Day Forecast</h2>';
+    
+        for (var i = 0; i < forecasts.length; i++) {
+            var forecastDate = new Date(forecasts[i].dt * 1000); 
+            var date = forecastDate.toLocaleDateString();
+            var time = forecastDate.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
+            var temperature = forecasts[i].main.temp;
+            var weatherDescription = forecasts[i].weather[0].description;
+            var iconCode = forecasts[i].weather[0].icon;
+            var windSpeed = forecasts[i].wind.speed;
+    
+           
+            var isWindy = windSpeed > 0; 
+            
+            var windyIcon = isWindy ? '<img style="height:50px; width:auto" src="data:image/png;base64,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" alt="Windy">' : '';
+    
+            html += `
+            <div style="display: inline-block;background-color:white;">
+                <div class="forecast-item" >
+                    <div class="forecast-date">${date}</div>
+                    <div class="weather-icon">
+                        <img style="height:50px; width:auto"  src="http://openweathermap.org/img/wn/${iconCode}.png" alt="Weather Icon">
+                        </br>
+                        ${windyIcon}
+                    </div>
+                    <div class="weather-details">
+                        <p class="time">Time: ${time}</p>
+                        <p class="temperature">Temperature: ${temperature}°C</p>
+                        <p class="weather-description">Weather: ${weatherDescription}</p>
+                    </div>
+                </div>
+            </div>
+            `;
+        }
+    
+        html += '</div>';
+    
+        $('#forecast').html(html);
+    }
+    
+    
+    
+    
+</script>
+</html>
